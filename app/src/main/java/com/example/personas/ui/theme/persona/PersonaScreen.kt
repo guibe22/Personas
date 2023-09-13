@@ -383,16 +383,7 @@ fun DateTextField(
                 Icon(imageVector = Icons.Default.Warning, contentDescription = "")
             }
         },
-        keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.Text,
-            imeAction = ImeAction.Done
-        ),
-        keyboardActions = KeyboardActions(
-            onDone = {
-                keyboardController?.hide()
-            }
-        )
-
+        readOnly = true
     )
     if (isDatePickerVisible) {
         val datePickerDialog = DatePickerDialog(
@@ -407,9 +398,12 @@ fun DateTextField(
             datePickerDialog.show()
             onDispose {
                 datePickerDialog.dismiss()
-                isDatePickerVisible = false
+
             }
         }
+        datePickerDialog.setOnCancelListener {isDatePickerVisible = false }
+        datePickerDialog.setOnDismissListener { isDatePickerVisible = false }
+
     }
 
 
